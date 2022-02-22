@@ -17,8 +17,11 @@ class RegistrationScreen extends StatelessWidget {
           children: <Widget>[
             SizedBox(
               height: 200.0,
-              child: Image(
-                image: Assets.images.logoPng,
+              child: Hero(
+                tag: Assets.images.logoPng,
+                child: Image(
+                  image: Assets.images.logoPng,
+                ),
               ),
             ),
             const SizedBox(

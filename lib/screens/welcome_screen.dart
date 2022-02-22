@@ -20,8 +20,11 @@ class WelcomeScreen extends StatelessWidget {
             Row(
               children: [
                 SizedBox(
-                  child: Image(
-                    image: Assets.images.logoPng,
+                  child: Hero(
+                    tag: Assets.images.logoPng,
+                    child: Image(
+                      image: Assets.images.logoPng,
+                    ),
                   ),
                   height: 60.0,
                 ),
@@ -38,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(
+                  Navigator.pushNamed(
                     context,
                     LoginScreen.routeName,
                   );
@@ -50,9 +53,9 @@ class WelcomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(
+                  Navigator.pushNamed(
                     context,
-                    LoginScreen.routeName,
+                    RegistrationScreen.routeName,
                   );
                 },
                 child: const Text('Register'),
