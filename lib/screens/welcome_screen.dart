@@ -2,6 +2,7 @@ import 'package:flash_chat_flutter/models/models.dart';
 import 'package:flash_chat_flutter/screens/screens.dart';
 import 'package:flash_chat_flutter/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -77,10 +78,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   ),
                   height: 60,
                 ),
-                const Text(
-                  'Flash Chat',
-                  style: AppTheme.text45w900Black54,
-                ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      'Flash Chat',
+                      textStyle: AppTheme.text45w900Black54,
+                    ),
+                  ],
+                )
               ],
             ),
             const SizedBox(
