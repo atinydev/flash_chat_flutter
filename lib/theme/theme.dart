@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static const Color primary = Colors.lightBlueAccent;
+  static const Color secondary = Colors.blueAccent;
 
   static const sendButtonTextStyle = TextStyle(
     color: primary,
@@ -26,6 +27,21 @@ class AppTheme {
     color: Colors.black54,
     fontWeight: FontWeight.w900,
   );
+
+  static OutlineInputBorder outlineInputBorder({
+    required Color color,
+    required double borderSideWith,
+  }) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: color,
+        width: borderSideWith,
+      ),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(32.0),
+      ),
+    );
+  }
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: primary,

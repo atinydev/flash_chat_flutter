@@ -1,6 +1,8 @@
 import 'package:flash_chat_flutter/models/assets.dart';
 import 'package:flutter/material.dart';
 
+import '../theme/theme.dart';
+
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
 
@@ -14,7 +16,7 @@ class RegistrationScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
+          children: [
             SizedBox(
               height: 200.0,
               child: Hero(
@@ -28,22 +30,16 @@ class RegistrationScreen extends StatelessWidget {
               height: 48.0,
             ),
             TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: const InputDecoration(
+              onChanged: (value) {},
+              decoration: InputDecoration(
                 hintText: 'Enter your email',
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
+                enabledBorder: AppTheme.outlineInputBorder(
+                  color: AppTheme.secondary,
+                  borderSideWith: 1,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
+                focusedBorder: AppTheme.outlineInputBorder(
+                  color: AppTheme.secondary,
+                  borderSideWith: 2,
                 ),
               ),
             ),
@@ -52,19 +48,15 @@ class RegistrationScreen extends StatelessWidget {
             ),
             TextField(
               onChanged: (value) {},
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Enter your password',
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
+                enabledBorder: AppTheme.outlineInputBorder(
+                  color: AppTheme.secondary,
+                  borderSideWith: 1,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
+                focusedBorder: AppTheme.outlineInputBorder(
+                  color: AppTheme.secondary,
+                  borderSideWith: 2,
                 ),
               ),
             ),
@@ -78,7 +70,6 @@ class RegistrationScreen extends StatelessWidget {
                 child: const Text('Register'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blueAccent,
-                  onPrimary: Colors.white,
                 ),
               ),
             ),

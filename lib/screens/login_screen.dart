@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
                 tag: Assets.images.logoPng,
                 child: Image(
                   image: Assets.images.logoPng,
-                ),
+              ),
               ),
             ),
             const SizedBox(
@@ -39,8 +39,9 @@ class LoginScreen extends StatelessWidget {
             ),
             TextField(
               onChanged: (value) {},
-              decoration:
-                  const InputDecoration(hintText: 'Enter your password'),
+              decoration: const InputDecoration(
+                hintText: 'Enter your password',
+              ),
             ),
             const SizedBox(
               height: 24,
