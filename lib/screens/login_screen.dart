@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
             ),
             TextField(
               onChanged: (value) {},
-              decoration: const InputDecoration(
+              decoration: const InputDecoration (
                 hintText: 'Enter your  email',
               ),
             ),
