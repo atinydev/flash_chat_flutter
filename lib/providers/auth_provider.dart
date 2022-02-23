@@ -36,7 +36,17 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> signOut() async {
+    await auth.signOut();
+  }
+
   void cleanData() {
+    if (emailTextController.text != '') {
+      emailTextController.clear();
+    }
+    if (passwordTextController.text != '') {
+      passwordTextController.clear();
+    }
     email = '';
     password = '';
   }

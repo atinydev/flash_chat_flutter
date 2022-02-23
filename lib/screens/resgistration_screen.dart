@@ -93,8 +93,6 @@ class RegistrationScreen extends StatelessWidget {
                     final user = await authProvider.createUser();
                     if (user != null) {
                       Navigator.pushNamed(context, ChatScreen.routeName);
-                      authProvider.emailTextController.clear();
-                      authProvider.passwordTextController.clear();
                       authProvider.cleanData();
                     }
                   },

@@ -71,8 +71,6 @@ class LoginScreen extends StatelessWidget {
                   final user = await authProvider.signIn();
                   if (user != null) {
                     Navigator.pushNamed(context, ChatScreen.routeName);
-                    authProvider.emailTextController.clear();
-                    authProvider.passwordTextController.clear();
                     authProvider.cleanData();
                   }
                 },
