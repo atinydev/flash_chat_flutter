@@ -1,12 +1,23 @@
 import 'package:flash_chat_flutter/models/assets.dart';
+import 'package:flash_chat_flutter/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../theme/theme.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
 
   static const routeName = 'Registration';
+
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  final auth = FirebaseAuth.instance;
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +41,11 @@ class RegistrationScreen extends StatelessWidget {
               height: 48.0,
             ),
             TextField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: 'Enter your email',
                 enabledBorder: AppTheme.outlineInputBorder(
@@ -47,7 +62,12 @@ class RegistrationScreen extends StatelessWidget {
               height: 8.0,
             ),
             TextField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.text,
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: 'Enter your password',
                 enabledBorder: AppTheme.outlineInputBorder(
@@ -66,7 +86,17 @@ class RegistrationScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    final newUser = await auth.createUserWithEmailAndPassword(
+                      email: email,
+                      password: password,
+                    );
+                    Navigator.pushNamed(context, ChatScreen.routeName);
+                  } catch (e) {
+                    print(e);
+                  }
+                },
                 child: const Text('Register'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blueAccent,
