@@ -7,6 +7,7 @@ class AuthProvider extends ChangeNotifier {
   var password = '';
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+  bool showSpinner = false;
 
   final auth = FirebaseAuth.instance;
 
@@ -38,6 +39,16 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> signOut() async {
     await auth.signOut();
+  }
+
+  void wait() {
+    showSpinner = true;
+    notifyListeners();
+  }
+
+  void resume() {
+    showSpinner = false;
+    notifyListeners();
   }
 
   void cleanData() {
