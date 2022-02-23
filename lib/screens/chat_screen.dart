@@ -1,26 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/auth_provider.dart';
 import '../theme/theme.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
   static const routeName = 'Chat';
-
-  @override
-  State<ChatScreen> createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends State<ChatScreen> {
-  final auth = FirebaseAuth.instance;
-  late final User? loggedInUser;
-
-  @override
-  void initState() {
-    super.initState();
-    loggedInUser = auth.currentUser;
-  }
 
   @override
   Widget build(BuildContext context) {
