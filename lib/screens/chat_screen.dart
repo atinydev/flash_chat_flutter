@@ -41,7 +41,9 @@ class ChatScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        authProvider.messageText = value;
+                      },
                       decoration: const InputDecoration(
                         hintText: 'Type your message here...',
                         border: InputBorder.none,
@@ -51,7 +53,12 @@ class ChatScreen extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      authProvider.firestore.collection('messages').add({
+                        'text': authProvider.messageText,
+                        'sender': authProvider.auth.currentUser?.email,
+                      });
+                    },
                     child: const Text(
                       'Send',
                       style: AppTheme.sendButtonTextStyle,

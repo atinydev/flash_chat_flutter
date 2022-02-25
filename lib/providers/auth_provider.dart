@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat_flutter/services/notifications_service.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthProvider extends ChangeNotifier {
   var email = '';
@@ -8,8 +9,10 @@ class AuthProvider extends ChangeNotifier {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   bool showSpinner = false;
+  var messageText = '';
 
   final auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
 
   Future<UserCredential?> createUser() async {
     try {
