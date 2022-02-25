@@ -64,4 +64,20 @@ class AuthProvider extends ChangeNotifier {
     email = '';
     password = '';
   }
+
+  void addData() {
+    firestore.collection('messages').add({
+      'text': messageText,
+      'sender': auth.currentUser?.email,
+    });
+  }
+
+  Future<void> messagesStream() async {
+    var snapshots = firestore.collection('messages').snapshots();
+    await for (final snapshot in snapshots) {
+      for (var message in snapshot.docs) {
+        print(message.data());
+      }
+    }
+  }
 }

@@ -14,7 +14,8 @@ class ChatScreen extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return WillPopScope(
       onWillPop: () async {
-        authProvider.auth.signOut();
+        authProvider.signOut();
+
         return true;
       },
       child: Scaffold(
@@ -23,8 +24,9 @@ class ChatScreen extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-                authProvider.cleanData();
-                Navigator.pop(context);
+                authProvider.messagesStream();
+                // authProvider.signOut();
+                // Navigator.pop(context);
               },
             ),
           ],
@@ -54,10 +56,7 @@ class ChatScreen extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      authProvider.firestore.collection('messages').add({
-                        'text': authProvider.messageText,
-                        'sender': authProvider.auth.currentUser?.email,
-                      });
+                      authProvider.addData();
                     },
                     child: const Text(
                       'Send',

@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                 TextField(
                   controller: authProvider.emailTextController,
                   onChanged: (value) {
-                    authProvider.email = value;
+                    authProvider.email = value.trim();
                   },
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.emailAddress,
@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                 TextField(
                   controller: authProvider.passwordTextController,
                   onChanged: (value) {
-                    authProvider.password = value;
+                    authProvider.password = value.trim();
                   },
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.text,
