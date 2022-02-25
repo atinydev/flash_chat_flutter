@@ -3,7 +3,7 @@ import 'package:flash_chat_flutter/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AuthProvider extends ChangeNotifier {
+class FirebaseProvider extends ChangeNotifier {
   var email = '';
   var password = '';
   final emailTextController = TextEditingController();
@@ -72,12 +72,7 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
-  Future<void> messagesStream() async {
-    var snapshots = firestore.collection('messages').snapshots();
-    await for (final snapshot in snapshots) {
-      for (var message in snapshot.docs) {
-        print(message.data());
-      }
-    }
+  Stream<QuerySnapshot<Map<String, dynamic>>> messagesStream() {
+    return firestore.collection('messages').snapshots();
   }
 }

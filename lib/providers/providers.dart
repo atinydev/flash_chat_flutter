@@ -1,1 +1,1 @@
-export 'auth_provider.dart';
+export 'firebase_provider.dart';

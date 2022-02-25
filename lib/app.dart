@@ -1,4 +1,4 @@
-import 'package:flash_chat_flutter/providers/auth_provider.dart';
+import 'package:flash_chat_flutter/providers/firebase_provider.dart';
 import 'package:flash_chat_flutter/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ class FlashChat extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => AuthProvider(),
+          create: (context) => FirebaseProvider(),
         ),
       ],
       child: const _App(),
