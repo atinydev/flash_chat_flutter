@@ -45,6 +45,10 @@ class FirebaseProvider extends ChangeNotifier {
     await auth.signOut();
   }
 
+  String currentUser() {
+    return auth.currentUser!.email!;
+  }
+
   void wait() {
     showSpinner = true;
     notifyListeners();
@@ -74,10 +78,11 @@ class FirebaseProvider extends ChangeNotifier {
     firestore.collection('messages').add({
       'text': messageText,
       'sender': auth.currentUser?.email,
+      'created_at': FieldValue.serverTimestamp()
     });
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> messagesStream() {
-    return firestore.collection('messages').snapshots();
+    return firestore.collection('messages').orderBy('created_at').snapshots();
   }
 }

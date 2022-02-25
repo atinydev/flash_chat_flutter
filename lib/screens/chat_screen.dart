@@ -11,7 +11,6 @@ class ChatScreen extends StatelessWidget {
 
   static const routeName = 'Chat';
 
-
   @override
   Widget build(BuildContext context) {
     final firebaseProvider =
@@ -99,8 +98,9 @@ class _MessagesStream extends StatelessWidget {
         if (!snapshot.hasData) {
           return const SizedBox();
         }
-        final collections = snapshot.data!.docs;
+        final documents = snapshot.data!.docs.reversed.toList();
         return ListView.builder(
+          reverse: true,
           physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
@@ -108,9 +108,9 @@ class _MessagesStream extends StatelessWidget {
             horizontal: 10,
             vertical: 20,
           ),
-          itemCount: collections.length,
+          itemCount: documents.length,
           itemBuilder: (context, index) {
-            final document = collections[index];
+            final document = documents[index];
             final email = document['sender'];
             final message = document['text'];
             return MessageBubble(

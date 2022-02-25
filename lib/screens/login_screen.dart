@@ -25,14 +25,15 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  height: 200,
-                  child: Hero(
-                    tag: Assets.images.logoPng,
-                    child: Image(
-                      image: Assets.images.logoPng,
+                Flexible(
+                  child: SizedBox(
+                    height: 200,
+                    child: Hero(
+                      tag: Assets.images.logoPng,
+                      child: Image(
+                        image: Assets.images.logoPng,
+                      ),
                     ),
                   ),
                 ),
@@ -73,7 +74,8 @@ class LoginScreen extends StatelessWidget {
                     authProvider.wait();
                     final user = await authProvider.signIn();
                     if (user != null) {
-                      Navigator.pushNamed(context, ChatScreen.routeName);
+                      Navigator.pushReplacementNamed(
+                          context, ChatScreen.routeName);
                       authProvider.cleanData();
                     }
                     authProvider.resume();
