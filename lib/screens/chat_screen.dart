@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flash_chat_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
   static const routeName = 'Chat';
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,26 +40,8 @@ class ChatScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: firebaseProvider.messagesStream(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const SizedBox();
-                  }
-                  final collections = snapshot.data!.docs;
-                  return ListView.builder(
-                    itemCount: collections.length,
-                    itemBuilder: (context, index) {
-                      final document = collections[index];
-                      final email = document['sender'];
-                      final message = document['text'];
-                      return ListTile(
-                        title: Text(message),
-                        subtitle: Text(email),
-                      );
-                    },
-                  );
-                },
+              child: _MessagesStream(
+                firebaseProvider: firebaseProvider,
               ),
             ),
             Container(
@@ -67,6 +51,7 @@ class ChatScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: firebaseProvider.chatController,
                       onChanged: (value) {
                         firebaseProvider.messageText = value;
                       },
@@ -80,6 +65,7 @@ class ChatScreen extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
+                      firebaseProvider.chatController.clear();
                       firebaseProvider.addData();
                     },
                     child: const Text(
@@ -93,6 +79,47 @@ class ChatScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MessagesStream extends StatelessWidget {
+  const _MessagesStream({
+    Key? key,
+    required this.firebaseProvider,
+  }) : super(key: key);
+
+  final FirebaseProvider firebaseProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      stream: firebaseProvider.messagesStream(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const SizedBox();
+        }
+        final collections = snapshot.data!.docs;
+        return ListView.builder(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 20,
+          ),
+          itemCount: collections.length,
+          itemBuilder: (context, index) {
+            final document = collections[index];
+            final email = document['sender'];
+            final message = document['text'];
+            return MessageBubble(
+              email: email,
+              message: message,
+            );
+          },
+        );
+      },
     );
   }
 }

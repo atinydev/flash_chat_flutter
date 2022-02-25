@@ -8,6 +8,7 @@ class FirebaseProvider extends ChangeNotifier {
   var password = '';
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+  final chatController = TextEditingController();
   bool showSpinner = false;
   var messageText = '';
 
@@ -55,14 +56,18 @@ class FirebaseProvider extends ChangeNotifier {
   }
 
   void cleanData() {
+    if (email != '') {
+      email = '';
+    }
+    if (password != '') {
+      password = '';
+    }
     if (emailTextController.text != '') {
       emailTextController.clear();
     }
     if (passwordTextController.text != '') {
       passwordTextController.clear();
     }
-    email = '';
-    password = '';
   }
 
   void addData() {
